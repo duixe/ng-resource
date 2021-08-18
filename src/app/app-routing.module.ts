@@ -6,6 +6,7 @@ import { ShoppingListComponent } from './shopping-list/shopping-list.component';
 import { RecipesComponent } from './recipes/recipes.component';
 import { NgModule, Component } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { AuthComponent } from './auth/auth.component';
 
 const appRoutes: Routes = [
     { path: '', redirectTo: '/recipes', pathMatch: 'full'},
@@ -24,6 +25,7 @@ const appRoutes: Routes = [
         }
     ]},
     { path: 'shopping-list', component: ShoppingListComponent},
+    { path: 'auth', component: AuthComponent }
 ];
 
 @NgModule({
