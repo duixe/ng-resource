@@ -12,19 +12,23 @@
           <a class="nav-link" href="#" (click)="onSelect('shopping-list')">Shooping Lists</a>
         </li> -->
         <li class="nav-item">
-          <a class="nav-link" routerLinkActive="active" routerLink="/recipes">Recipes <span class="sr-only">(current)</span></a>
+          <a class="nav-link" routerLinkActive="active" routerLink="/recipes" *ngIf="isAuthenticated">Recipes <span class="sr-only">(current)</span></a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" routerLinkActive="active" routerLink="/auth">Authenticate</a>
+          <a class="nav-link" routerLinkActive="active" routerLink="/auth" *ngIf="!isAuthenticated">Authenticate</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" routerLinkActive="active" routerLink="/shopping-list">Shooping Lists</a>
         </li>
+        <li class="nav-item">
+          <a href="" class="nav-link" *ngIf="isAuthenticated">logout</a>
+        </li>
         <li 
-          class="nav-item float-right dropdown" 
+          class="nav-item float-end dropdown" 
           appDropdown
           (click)="dropdown()"
-          >
+          *ngIf="isAuthenticated"
+        >
           <a class="nav-link dropdown-toggle"  id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             Manage 
           </a>

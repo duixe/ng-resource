@@ -3,9 +3,10 @@ import { NgForm } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { AuthService } from './auth.service';
 import { AuthResponseData } from './auth-response';
+import { Router } from '@angular/router';
 
 @Component({
-    selector: 'auth-component',
+    selector: 'app-auth-component',
     templateUrl: './auth.component.html'
 })
 export class AuthComponent {
@@ -13,7 +14,7 @@ export class AuthComponent {
     isLoading = false;
     error: string = null;
 
-    constructor(private authSerice: AuthService) {}
+    constructor(private authSerice: AuthService, private router: Router) {}
 
     onSwitchMode(): void {
         this.isLoggedInMode = !this.isLoggedInMode;
@@ -27,7 +28,7 @@ export class AuthComponent {
         let authObservables: Observable<AuthResponseData>;
 
         this.isLoading = true;
-        if(this.isLoggedInMode) {
+        if (this.isLoggedInMode) {
             authObservables = this.authSerice.login(email, password);
         }else {
             // this.authSerice.signUp(email, password).subscribe(
@@ -38,11 +39,10 @@ export class AuthComponent {
             //     errorMessage => {
             //         console.log(errorMessage);
             //         this.error = errorMessage;
-                    
-            //         this.isLoading = false;  
+            //         this.isLoading = false;
             //     }
             // )
-            //this 👆 or this 👇 is still valid
+            // this 👆 or this 👇 is still valid
             // if the later one is used then one will have to subscribe to the authObservables afterwards 
             authObservables = this.authSerice.signUp(email, password);
         }
@@ -51,12 +51,13 @@ export class AuthComponent {
             resData => {
                 console.log(resData);
                 this.isLoading = false;
+                this.router.navigate(['/recipes']);
             },
             errorMessage => {
                 console.log(errorMessage);
                 this.error = errorMessage;
-                
-                this.isLoading = false;  
+
+                this.isLoading = false;
             }
         );
 
